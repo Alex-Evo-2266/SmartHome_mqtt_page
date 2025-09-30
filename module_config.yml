@@ -1,0 +1,11 @@
+name: mqtt_page
+multiply: false
+containers:
+  - name: mqtt_page
+    config:
+        restart: always
+        ports: []
+        volumes: []
+        labels: []
+        depends_on: 
+          - rabbitmq.service_healthy
