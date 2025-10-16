@@ -1,11 +1,40 @@
-name: mqtt_page
+name: __MODULE_NAME__
+name_module: mqtt_page
 multiply: false
 containers:
-  - name: mqtt_page
+  - name: __MODULE_NAME__
     config:
-        restart: always
-        ports: []
-        volumes: []
-        labels: []
-        depends_on: 
-          - rabbitmq.service_healthy
+      build:
+        context: .
+        dockerfile: Dockerfile
+        args:
+          CONTAINER_NAME: __MODULE_NAME__
+          PORT: 3000
+          NEXT_BASE_PATH: "/modules/__MODULE_NAME__"
+      command: sh -c "cp -r /app/config_local/* /app/config && npm run start"
+      restart: always
+      environment:
+        EXCHANGE_SERVICE_DATA: ${EXCHANGE_SERVICE_DATA}
+        RABITMQ_PORT: ${RABITMQ_PORT}
+        RABITMQ_HOST: ${RABITMQ_HOST}
+        CONTAINER_NAME: __MODULE_NAME__
+        PORT: 3000
+      labels:
+        - "traefik.http.routers.__MODULE_NAME____ws.rule=PathPrefix(`/ws/__MODULE_NAME__`)"
+        - "traefik.http.routers.__MODULE_NAME____ws.service=__MODULE_NAME____ws"
+        - "traefik.http.services.__MODULE_NAME____ws.loadbalancer.server.port=3000"
+        - "traefik.http.routers.__MODULE_NAME____ws.entrypoints=websecure"
+        - "traefik.enable=true"
+        - "traefik.http.routers.__MODULE_NAME___http.rule=PathPrefix(`/modules/__MODULE_NAME__`)"
+        - "traefik.http.routers.__MODULE_NAME___http.entrypoints=web"
+        - "traefik.http.routers.__MODULE_NAME___http.middlewares=moduleauth@docker,module-__MODULE_NAME__-strip"
+        - "traefik.http.routers.__MODULE_NAME___http.service=__MODULE_NAME__"
+        - "traefik.http.routers.__MODULE_NAME___https.rule=PathPrefix(`/modules/__MODULE_NAME__`)"
+        - "traefik.http.routers.__MODULE_NAME___https.entrypoints=websecure"
+        - "traefik.http.routers.__MODULE_NAME___https.middlewares=moduleauth@docker,module-__MODULE_NAME__-strip"
+        - "traefik.http.routers.__MODULE_NAME___https.tls=true"
+        - "traefik.http.routers.__MODULE_NAME___https.service=__MODULE_NAME__"
+        - "traefik.http.services.__MODULE_NAME__.loadbalancer.server.port=3000"
+        - "traefik.http.middlewares.module-__MODULE_NAME__-strip.stripprefixregex.regex=^/modules/__MODULE_NAME__"
+      volumes:
+        - ${CONFIGURATE_DIR}/__MODULE_NAME__:/app/config
