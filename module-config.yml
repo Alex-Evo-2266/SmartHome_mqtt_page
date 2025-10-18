@@ -1,6 +1,7 @@
 name: mqtt_page
 name_module: mqtt_page
 multiply: false
+type: docker
 containers:
   - name: mqtt_page
     config:

@@ -1,5 +1,6 @@
 name: __MODULE_NAME__
 name_module: mqtt_page
+type: docker
 multiply: false
 containers:
   - name: __MODULE_NAME__
