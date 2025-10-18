@@ -1,7 +1,7 @@
 'use client';
 import RecursiveTree from '@/components/reqursivTree';
 import { MessageService } from '@/lib/hooks/messageService.hook';
-import {SERVICE_NAME_IN_DATA} from '@/lib/envVar'
+import {SERVICE_NAME_IN_DATA, RABBITMQ_HOST, RABBITMQ_PORT, EXCHANGE_SERVICE_DATA} from '@/lib/envVar'
 
 export default function SocketClient() {
 
@@ -11,6 +11,7 @@ export default function SocketClient() {
 
   return (
     <div>
+      <p>{RABBITMQ_HOST} {RABBITMQ_PORT} {EXCHANGE_SERVICE_DATA}</p>
       <h2>WebSocket Messages</h2>
         <RecursiveTree label='mqtt' data={messages} opened/>
     </div>
