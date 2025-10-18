@@ -11,7 +11,6 @@ export default function SocketClient() {
 
   return (
     <div>
-      <p>1:{RABBITMQ_HOST} 2:{RABBITMQ_PORT} 3:{EXCHANGE_SERVICE_DATA}</p>
       <h2>WebSocket Messages</h2>
         <RecursiveTree label='mqtt' data={messages} opened/>
     </div>
