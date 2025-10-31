@@ -26,6 +26,7 @@ containers:
         - "traefik.http.routers.__MODULE_NAME____ws.rule=PathPrefix(`/ws/__MODULE_NAME__`)"
         - "traefik.http.routers.__MODULE_NAME____ws.service=__MODULE_NAME____ws"
         - "traefik.http.services.__MODULE_NAME____ws.loadbalancer.server.port=3000"
+        - "traefik.http.routers.__MODULE_NAME____ws.tls=true"
         - "traefik.http.routers.__MODULE_NAME____ws.entrypoints=websecure"
         - "traefik.enable=true"
         - "traefik.http.routers.__MODULE_NAME___http.rule=PathPrefix(`/modules/__MODULE_NAME__`)"
