@@ -12,6 +12,7 @@ containers:
           CONTAINER_NAME: mqtt_page
           PORT: 3000
           NEXT_BASE_PATH: "/modules/mqtt_page"
+          NEXT_PUBLIC_WS_PREFIX: mqtt_page
       command: sh -c "cp -r /app/config_local/* /app/config && npm run start"
       restart: always
       environment:
@@ -19,6 +20,7 @@ containers:
         RABITMQ_PORT: ${RABITMQ_PORT}
         RABITMQ_HOST: ${RABITMQ_HOST}
         CONTAINER_NAME: mqtt_page
+        NEXT_PUBLIC_WS_PREFIX: mqtt_page
         PORT: 3000
       labels:
         - "traefik.http.routers.mqtt_page__ws.rule=PathPrefix(`/ws/mqtt_page`)"

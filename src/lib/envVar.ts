@@ -5,3 +5,4 @@ export const SERVICE_NAME_IN_DATA = "MQTT_messages"
 
 export const PORT = process.env.PORT ?? 3000
 export const CONTAINER_NAME = process.env.CONTAINER_NAME ?? "localhost"
+export const NEXT_PUBLIC_WS_PREFIX = process.env.NEXT_PUBLIC_WS_PREFIX

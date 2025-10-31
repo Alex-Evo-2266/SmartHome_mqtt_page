@@ -1,6 +1,7 @@
 'use client';
 
 import {useCallback, useRef} from 'react'
+import { NEXT_PUBLIC_WS_PREFIX } from '../envVar';
 
 export type ISocketData = {
     type: string
@@ -18,7 +19,8 @@ export const useSocket = (callbacks: MessageCallback[] = []) =>{
 
   const connectSocket = useCallback(()=>{
     try{
-      const path = `ws://${window.location.host}/ws/mqtt_page`
+      const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+      const path = `${protocol}://${window.location.host}/ws/${NEXT_PUBLIC_WS_PREFIX}`;
       socket.current = new WebSocket(path)
     }catch(e){
       console.error(e)

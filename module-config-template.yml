@@ -12,6 +12,7 @@ containers:
           CONTAINER_NAME: __MODULE_NAME__
           PORT: 3000
           NEXT_BASE_PATH: "/modules/__MODULE_NAME__"
+          NEXT_PUBLIC_WS_PREFIX: __MODULE_NAME__
       command: sh -c "cp -r /app/config_local/* /app/config && npm run start"
       restart: always
       environment:
@@ -19,6 +20,7 @@ containers:
         RABITMQ_PORT: ${RABITMQ_PORT}
         RABITMQ_HOST: ${RABITMQ_HOST}
         CONTAINER_NAME: __MODULE_NAME__
+        NEXT_PUBLIC_WS_PREFIX: __MODULE_NAME__
         PORT: 3000
       labels:
         - "traefik.http.routers.__MODULE_NAME____ws.rule=PathPrefix(`/ws/__MODULE_NAME__`)"
